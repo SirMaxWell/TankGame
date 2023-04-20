@@ -22,6 +22,13 @@ protected:
 private:
 	UPROPERTY()
 	class UCapsuleComponent* CapsuleComp; // Forward declaring 
+	UPROPERTY()
+	UStaticMeshComponent* BaseMesh;
+	UPROPERTY()
+	UStaticMeshComponent* TurretMesh;
+	UPROPERTY()
+	USceneComponent* ProjectileSpawnPoint;
+	
 
 public:	
 	// Called every frame
