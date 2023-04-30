@@ -15,8 +15,7 @@ public:
 	// Sets default values for this pawn's properties
 	ABasePawn();
 
-	UPROPERTY(EditAnywhere,BlueprintReadWrite)
-	float speed = 20.f;
+	
 
 protected:
 	// Called when the game starts or when spawned
