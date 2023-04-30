@@ -3,6 +3,7 @@
 
 #include "BasePawn.h"
 #include "Components/CapsuleComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 ABasePawn::ABasePawn()
@@ -29,12 +30,19 @@ void ABasePawn::BeginPlay()
 	
 }
 
-// Called every frame
-void ABasePawn::Tick(float DeltaTime)
+void ABasePawn::RotateTurret(FVector LookAtTarget)
 {
-	Super::Tick(DeltaTime);
-
+	FVector ToTarget = LookAtTarget - TurretMesh->GetComponentLocation();
+	// Only need the Yaw, avoids rotating the head of turret into the ground
+	FRotator LookAtRotation = FRotator(0.f, ToTarget.Rotation().Yaw, 0.f);  
+	TurretMesh->SetWorldRotation(FMath::RInterpTo(
+		TurretMesh->GetComponentRotation(),
+		LookAtRotation,
+		UGameplayStatics::GetWorldDeltaSeconds(this), 5.f)
+		); // Instead of setting the Look at Rotation, I interp between, avoids a stutter looking mouse is over center of turret head
 }
+
+
 
 
 
