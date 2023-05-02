@@ -42,6 +42,14 @@ void ABasePawn::RotateTurret(FVector LookAtTarget)
 		); // Instead of setting the Look at Rotation, I interp between, avoids a stutter looking mouse is over center of turret head
 }
 
+void ABasePawn::Fire()
+{
+	FVector ProjectileSpawnPointLoc = ProjectileSpawnPoint->GetComponentLocation();
+
+	DrawDebugSphere(GetWorld(), ProjectileSpawnPointLoc, 25.f, 12, FColor::Blue, false, 3.f);
+
+}
+
 
 
 

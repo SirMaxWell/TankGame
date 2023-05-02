@@ -15,6 +15,8 @@ public:
 	// Sets default values for this pawn's properties
 	ABasePawn();
 
+
+
 	
 
 protected:
@@ -22,6 +24,8 @@ protected:
 	virtual void BeginPlay() override;
 
 	void RotateTurret(FVector LookAtTarget);
+	void Fire();
+
 
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
