@@ -29,6 +29,14 @@ void ATurret::BeginPlay()
 
 }
 
+void ATurret::HandleDestruction()
+{
+	Super::HandleDestruction();
+	Destroy();
+
+	
+}
+
 void ATurret::CheckFire()
 {
 	if (Tank)

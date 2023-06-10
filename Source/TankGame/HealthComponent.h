@@ -33,6 +33,9 @@ private:
 		class AController *Instigator,
 		AActor *DamageCauser);
 
+
+	class ATankGameMode* TankGameMode;
+
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
