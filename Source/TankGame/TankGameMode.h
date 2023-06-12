@@ -23,6 +23,7 @@ protected:
 
 private:
 	class ATank* Tank;
+	class ATankPlayerController* TankPlayerController;
 
 	
 };
