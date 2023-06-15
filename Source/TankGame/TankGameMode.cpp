@@ -31,6 +31,32 @@ void ATankGameMode::BeginPlay()
 {
 	Super::BeginPlay();
 
+	HandleGameStart();
+
+	
+}
+
+void ATankGameMode::HandleGameStart()
+{
 	Tank = Cast<ATank>(UGameplayStatics::GetPlayerPawn(this, 0));
 	TankPlayerController = Cast<ATankPlayerController>(UGameplayStatics::GetPlayerController(this, 0));
+
+	StartGame();
+
+	if (TankPlayerController)
+	{
+		TankPlayerController->SetPlayerEnabledState(false);
+		FTimerHandle PlayerEnableTimerHandle;
+		FTimerDelegate PlayerEnableTimerDelegate = FTimerDelegate::CreateUObject(
+			TankPlayerController,
+			&ATankPlayerController::SetPlayerEnabledState,
+			true
+		);
+		GetWorldTimerManager().SetTimer(PlayerEnableTimerHandle,
+			PlayerEnableTimerDelegate,
+			StartDelay,
+			false
+		);
+	}
+
 }
