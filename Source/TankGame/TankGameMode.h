@@ -24,6 +24,9 @@ protected:
 	UFUNCTION(BlueprintImplementableEvent)
 		void StartGame();
 
+	UFUNCTION(BlueprintImplementableEvent)
+		void GameOver(bool bWonGame);
+
 private:
 	class ATank* Tank;
 	class ATankPlayerController* TankPlayerController;
@@ -32,5 +35,7 @@ private:
 
 	void HandleGameStart();
 
+	int32 TargetTurrets = 0;
+	int32 GetTargetTurretCount();
 	
 };

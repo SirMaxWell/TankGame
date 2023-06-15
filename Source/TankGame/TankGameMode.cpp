@@ -6,6 +6,7 @@
 #include "Tank.h"
 #include "Turret.h"
 #include "TankPlayerController.h"
+#include "Kismet/GameplayStatics.h"
 
 
 void ATankGameMode::ActorDied(AActor* DeadActor)
@@ -19,11 +20,16 @@ void ATankGameMode::ActorDied(AActor* DeadActor)
 			//Tank->GetTankPlayerController()->bShowMouseCursor = false;
 			TankPlayerController->SetPlayerEnabledState(false);
 		}
-		
+		GameOver(false);
 	}
 	else if (ATurret* DestoryedTower = Cast<ATurret>(DeadActor))
 	{
 		DestoryedTower->HandleDestruction();
+		--TargetTurrets;
+		if (TargetTurrets == 0)
+		{
+			GameOver(true);
+		}
 	}
 }
 
@@ -38,6 +44,7 @@ void ATankGameMode::BeginPlay()
 
 void ATankGameMode::HandleGameStart()
 {
+	TargetTurrets = GetTargetTurretCount();
 	Tank = Cast<ATank>(UGameplayStatics::GetPlayerPawn(this, 0));
 	TankPlayerController = Cast<ATankPlayerController>(UGameplayStatics::GetPlayerController(this, 0));
 
@@ -59,4 +66,13 @@ void ATankGameMode::HandleGameStart()
 		);
 	}
 
+}
+
+int32 ATankGameMode::GetTargetTurretCount()
+{
+	TArray<AActor*> Turrets;
+	UGameplayStatics::GetAllActorsOfClass(this, ATurret::StaticClass(), Turrets); // any turrets and any class that inherits from turrets
+
+	
+	return Turrets.Num();
 }
