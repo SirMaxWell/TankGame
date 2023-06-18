@@ -27,6 +27,12 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Combat")
 		float Damage = 50.0f;
 
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	class UParticleSystem* HitParticles;
+
+	UPROPERTY(VisibleAnywhere, Category = "Combat")
+	class UParticleSystemComponent* HitTrailParticles;
+
 	UPROPERTY(VisibleAnywhere, Category = "Movement")
 	class UProjectileMovementComponent* ProjectileMovementComponent;
 
