@@ -4,7 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Camera/CameraShakeBase.h"
 #include "Projectile.generated.h"
+
+
+
 
 UCLASS()
 class TANKGAME_API AProjectile : public AActor
@@ -29,6 +33,16 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	class UParticleSystem* HitParticles;
+
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	class USoundBase *LaunchSound;
+
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	 USoundBase *HitSound;
+
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	TSubclassOf<class UCameraShakeBase> HitCameraShakeClass;
+
 
 	UPROPERTY(VisibleAnywhere, Category = "Combat")
 	class UParticleSystemComponent* HitTrailParticles;

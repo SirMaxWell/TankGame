@@ -28,7 +28,21 @@ ABasePawn::ABasePawn()
 void ABasePawn::HandleDestruction()
 {
 	// sound effect 
+	if (DeathParticles)
+	{
+		UGameplayStatics::SpawnEmitterAtLocation(this, DeathParticles, GetActorLocation(), GetActorRotation());
 
+	}
+	if (DeathSound)
+	{
+		UGameplayStatics::PlaySoundAtLocation(this, DeathSound, GetActorLocation());
+	}
+	if (DeathCameraShakeClass)
+	{
+		GetWorld()->GetFirstPlayerController()->ClientStartCameraShake(DeathCameraShakeClass);
+	}
+
+	
 }
 
 // Called when the game starts or when spawned
@@ -55,7 +69,7 @@ void ABasePawn::Fire()
 	FVector ProjectileSpawnPointLoc = ProjectileSpawnPoint->GetComponentLocation();
 	FRotator ProjectileSpawnPointRot = ProjectileSpawnPoint->GetComponentRotation();
 	//DrawDebugSphere(GetWorld(), ProjectileSpawnPointLoc, 25.f, 12, FColor::Blue, false, 3.f);
-	auto Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileClass, ProjectileSpawnPointLoc, ProjectileSpawnPointRot); // Spawns Actor
+	AProjectile* Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileClass, ProjectileSpawnPointLoc, ProjectileSpawnPointRot); // Spawns Actor
 	Projectile->SetOwner(this);
 }
 

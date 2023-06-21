@@ -24,6 +24,8 @@ public:
 
 	APlayerController* GetTankPlayerController() const { return TankPlayerController; }
 
+	bool bAlive = true;
+
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 

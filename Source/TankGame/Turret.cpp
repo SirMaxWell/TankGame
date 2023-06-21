@@ -39,12 +39,13 @@ void ATurret::HandleDestruction()
 
 void ATurret::CheckFire()
 {
-	if (Tank)
+	if (Tank == nullptr)
 	{
-		if (WithinRange())
-		{
-			Fire();
-		}
+		return;
+	}
+	if (WithinRange() && Tank->bAlive)
+	{
+		Fire();
 	}
 }
 
